@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rentalhub/users/owner/pages/addHouse/ownerAddHouse.dart';
+import 'package:rentalhub/users/owner/pages/properties/ownerProperties.dart';
 import 'package:rentalhub/users/owner/pages/dashboard/ownerDashboard.dart';
 import 'package:rentalhub/users/owner/pages/messages/ownerListMessage.dart';
 
@@ -14,7 +14,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
   final List<Widget> pages = [
     OwnerDashboard(),
     OwnerListMessage(),
-    OwnerAddHouse(),
+    OwnerProperties(),
   ];
 
   void onItemTapped(int index) {
@@ -38,8 +38,8 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
               label: 'Messages',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home_repair_service_outlined),
-              label: 'Add',
+              icon: Icon(Icons.collections),
+              label: 'Properties',
             ),
           ],
           currentIndex: selectedIndex,

@@ -67,7 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: Text('Register'),
         backgroundColor: Colors.lightBlue,
-        titleTextStyle: TextStyle(
+        titleTextStyle: const TextStyle(
           color: Colors.white,
           fontSize: 30,
           fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 TextFormField(
                   controller: usernameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Full Name',
                   ),
                   validator: (value) {
@@ -95,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 10),
                 TextFormField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Email',
                   ),
                   validator: (value) {
@@ -109,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 10),
                 TextFormField(
                   controller: locationController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Location',
                   ),
                   validator: (value) {
@@ -122,7 +122,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 15),
                 TextFormField(
                   initialValue: passwordLength.toString(),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password Length (8-15)',
                   ),
                   keyboardType: TextInputType.number,

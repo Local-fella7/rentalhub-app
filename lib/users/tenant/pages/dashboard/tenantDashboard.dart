@@ -31,6 +31,42 @@ class _TenantDashboardState extends State<TenantDashboard> {
         ),
         title: const Text('Rent Now, Smile Always'),
         backgroundColor: Colors.lightBlue,
+        actions: [
+          Stack(
+            children: [
+              IconButton(iconSize: 30,
+              icon: const Icon(Icons.notifications),
+                onPressed: (){
+                  //implement the notification functionality here
+                },
+          ),
+          if (unreadMessages > 0)
+          Positioned(
+            right: 11,
+            top: 11,
+            child: Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              constraints: const BoxConstraints(
+                minWidth: 14,
+                minHeight: 14,
+              ),
+              child: Text(
+                '$unreadMessages',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 8,
+                ),
+                textAlign: TextAlign.center,
+              )
+            )
+          )
+          ],
+          )
+        ],
       ),
       drawer: ProfileDrawer(
         username: tenantName,

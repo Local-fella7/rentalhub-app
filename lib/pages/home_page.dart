@@ -346,7 +346,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   final List<House> _houses = [
     House(
-      imagePath: "",
+      imagePath: "assets/images/house_01.jpg",
       description: 'A beautiful 3 bedroom house in New York.',
       price: 250000,
       ownerPhoneNumber: '0763399247',
