@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rentalhub/users/owner/pages/properties/ownerViewProperty.dart';
+
+import '../../../../pages/profile_page.dart';
 
 class Property {
   final String description;
   final String price;
-  final String phone;
   final String location;
   final bool isRented;
   final String imagePath;
@@ -11,7 +13,6 @@ class Property {
   Property({
     required this.description,
     required this.price,
-    required this.phone,
     required this.location,
     required this.isRented,
     required this.imagePath,
@@ -22,18 +23,16 @@ List<Property> sampleProperties = [
   Property(
     description: "Beautiful 3-bedroom apartment with sea view",
     price: "\$1500/month",
-    phone: "123-456-7890",
     location: "Downtown",
     isRented: true,
-    imagePath: "assets/images/house01.jpg",
+    imagePath: 'assets/images/house01.jpg',
   ),
   Property(
     description: "Cozy 2-bedroom house with garden",
     price: "\$1200/month",
-    phone: "987-654-3210",
     location: "Suburbs",
     isRented: false,
-    imagePath: "assets/images/house02.jpg",
+    imagePath: 'assets/images/house03.jpg',
   ),
   // Add more properties here
 ];
@@ -46,6 +45,9 @@ class OwnerProperties extends StatefulWidget {
 }
 
 class _OwnerPropertiesState extends State<OwnerProperties> {
+  final String ownerName = "Paschal Ephraim";
+  final String email = "paschalephraim@gmail.com";
+  final String location = "Arusha";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,31 +85,41 @@ class _OwnerPropertiesState extends State<OwnerProperties> {
                 ),
               ],
             ),
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  property.imagePath,
-                  height: 150,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  property.description,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        property.description,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      Text('Price: ${property.price}'),
+                      const SizedBox(height: 5),
+                      const SizedBox(height: 5),
+                      Text('Location: ${property.location}'),
+                      const SizedBox(height: 5),
+                      Text('State: ${property.isRented ? "Rented" : "Available"}'),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 5),
-                Text('Price: ${property.price}'),
-                const SizedBox(height: 5),
-                Text('Phone: ${property.phone}'),
-                const SizedBox(height: 5),
-                Text('Location: ${property.location}'),
-                const SizedBox(height: 5),
-                Text('State: ${property.isRented ? "Rented" : "Available"}'),
+                IconButton(
+                  icon: const Icon(Icons.arrow_forward, color: Colors.blue),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OwnerViewProperty(property: property),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           );
@@ -119,6 +131,15 @@ class _OwnerPropertiesState extends State<OwnerProperties> {
         },
         child: const Icon(Icons.add),
         backgroundColor: Colors.lightBlue,
+      ),
+      drawer: ProfileDrawer(
+        username: ownerName,
+        email: email,
+        location: location,
+        role: "Owner",
+        onLogout: () {
+          // Implement logout functionality
+        },
       ),
     );
   }
