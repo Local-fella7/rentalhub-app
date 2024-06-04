@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:characters/characters.dart';
 
 import 'package:rentalhub/pages/login_page.dart';
 
