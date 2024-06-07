@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rentalhub/users/tenant/pages/dashboard/tenantDashboard.dart';
-import 'package:rentalhub/users/tenant/pages/message/tenanatListMessages.dart';
+import 'package:rentalhub/users/tenant/pages/message/tenantListMessages.dart';
 import 'package:rentalhub/users/tenant/pages/view/tenantView.dart';
 
 class TenantHomePage extends StatefulWidget {

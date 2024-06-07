@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rentalhub/users/owner/pages/properties/ownerProperties.dart';
+import 'package:rentalhub/users/owner/pages/properties/ownerProperties.dart';  // Updated import
 
-class OwnerViewProperty extends StatefulWidget {
+class TenantViewProperty extends StatelessWidget {
   final Property property;
   final String? tenantName;
   final String? tenantPhone;
   final String? rentDuration;
 
-  const OwnerViewProperty({
+  const TenantViewProperty({
     super.key,
     required this.property,
     this.tenantName,
@@ -15,11 +15,6 @@ class OwnerViewProperty extends StatefulWidget {
     this.rentDuration,
   });
 
-  @override
-  State<OwnerViewProperty> createState() => _OwnerViewPropertyState();
-}
-
-class _OwnerViewPropertyState extends State<OwnerViewProperty> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,32 +30,34 @@ class _OwnerViewPropertyState extends State<OwnerViewProperty> {
           children: [
             const SizedBox(height: 20),
             Text(
-              widget.property.description,
+              property.description,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Image.asset(
-              widget.property.imagePath,
+              property.imagePath,
               height: 300,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
-            
             const SizedBox(height: 10),
-            Text('Price:   ${widget.property.price}',
-            style: TextStyle(fontSize: 16,)
+            Text(
+              'Price: ${property.price}',
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
-            Text('Location:   ${widget.property.location}',
-            style: TextStyle(fontSize: 16,) 
+            Text(
+              'Location: ${property.location}',
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 10),
-            Text('State:   ${widget.property.isRented ? "Rented" : "Available"}',
-            style: TextStyle(fontSize: 16,)
+            Text(
+              'State: ${property.isRented ? "Rented" : "Available"}',
+              style: const TextStyle(fontSize: 16),
             ),
-            if (widget.property.isRented && widget.tenantName != null) ...[
+            if (property.isRented && tenantName != null) ...[
               const SizedBox(height: 20),
               const Text(
                 'Tenant Information:',
@@ -70,16 +67,19 @@ class _OwnerViewPropertyState extends State<OwnerViewProperty> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text('Name:   ${widget.tenantName}',
-              style: TextStyle(fontSize: 16),
+              Text(
+                'Name: $tenantName',
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 5),
-              Text('Phone:   ${widget.tenantPhone}',
-              style: TextStyle(fontSize: 16,)
+              Text(
+                'Phone: $tenantPhone',
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 5),
-              Text('Rent Duration:   ${widget.rentDuration}',
-              style: TextStyle(fontSize: 16,)
+              Text(
+                'Rent Duration: $rentDuration',
+                style: const TextStyle(fontSize: 16),
               ),
             ],
           ],

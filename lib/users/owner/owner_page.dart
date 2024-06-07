@@ -12,9 +12,9 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
   int selectedIndex = 0;
 
   final List<Widget> pages = [
-    OwnerDashboard(),
-    OwnerListMessage(),
-    OwnerProperties(),
+    const OwnerDashboard(),
+    const OwnerListMessage(),
+    const OwnerProperties(), // Correctly initialize OwnerProperties
   ];
 
   void onItemTapped(int index) {
@@ -26,26 +26,27 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              label: 'Dashboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.sms),
-              label: 'Messages',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.collections),
-              label: 'Properties',
-            ),
-          ],
-          currentIndex: selectedIndex,
-          selectedItemColor: Colors.deepPurple,
-          unselectedItemColor: Colors.grey,
-          onTap: onItemTapped,
-        ));
+      body: pages[selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.sms),
+            label: 'Messages',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.collections),
+            label: 'Properties',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        onTap: onItemTapped,
+      ),
+    );
   }
 }

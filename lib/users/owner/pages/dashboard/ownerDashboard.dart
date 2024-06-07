@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rentalhub/pages/profile_page.dart';
+import 'package:rentalhub/users/owner/pages/messages/ownerListMessage.dart';
+import 'package:rentalhub/users/owner/pages/properties/ownerProperties.dart';
+import 'package:rentalhub/users/owner/pages/dashboard/ownerTenantList.dart';
 
 class OwnerDashboard extends StatefulWidget {
   const OwnerDashboard({super.key});
@@ -35,10 +38,16 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
         actions: [
           Stack(
             children: [
-              IconButton(iconSize: 30,
+              IconButton(
+                iconSize: 30,
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
-                  // Implement notification functionality
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OwnerListMessage(),
+                    ),
+                  );
                 },
               ),
               if (unreadMessages > 0)
@@ -93,7 +102,7 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 5,
                     blurRadius: 7,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -101,94 +110,122 @@ class _OwnerDashboardState extends State<OwnerDashboard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Welcome back!, $ownerName Your efforts in creating comfortable living spaces are truly appreciated. Here below is a summary of your entities in Rental Hub",
+                    "Welcome back!, $ownerName",
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.house_rounded,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        " Houses: $numberOfhouses",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Your dedication to providing comfortable living spaces does not go unnoticed. Your efforts in creating environments that promote comfort, convenience, and overall well-being are truly appreciated. Thank you for your commitment to ensuring that tenants feel at home and enjoy their living experience to the fullest. Here below is a summary of your entities in Rental Hub',
+                    style: TextStyle(
+                      fontSize: 19,
+                      color: Colors.white,
+                    ),
                   )
                 ],
               ),
             ),
             const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                color: Colors.deepPurpleAccent,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OwnerProperties(),
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.people,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        " Tenants: $numberOfCustomers",
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.house,
+                          color: Colors.black,
+                          size: 50,
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        SizedBox(width: 10),
+                        Text(
+                          " Properties",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OwnerTenantList(),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.people,
+                          color: Colors.black,
+                          size: 50,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          " Tenants",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:characters/characters.dart';
-
 import 'package:rentalhub/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -214,7 +212,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         selectedRole = value;
                       });
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         labelText: 'Select Role',
                         labelStyle: TextStyle(
                           fontSize: 25,
