@@ -93,7 +93,7 @@ class _TenantDashboardState extends State<TenantDashboard> {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.lightBlueAccent,
+                  color: Colors.deepPurpleAccent,
                   borderRadius: BorderRadius.circular(8.0),
                   boxShadow: [
                     BoxShadow(
@@ -137,7 +137,7 @@ class _TenantDashboardState extends State<TenantDashboard> {
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(8.0),
                     boxShadow: [
                       BoxShadow(
@@ -186,7 +186,7 @@ class _TenantDashboardState extends State<TenantDashboard> {
                 child: Container(
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.deepPurpleAccent,
                     borderRadius: BorderRadius.circular(8.0),
                     boxShadow: [
                       BoxShadow(

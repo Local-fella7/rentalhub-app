@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:rentalhub/pages/login_page.dart';
+import 'package:rentalhub/services/registrationServices/RegistrationServices.dart';
 
 class RegisterPage extends StatefulWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -14,49 +14,48 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmpasswordController = TextEditingController();
+  final TextEditingController confirmpasswordController =
+      TextEditingController();
   final TextEditingController locationController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   String? selectedRole;
   int passwordLength = 8; // Default password length
   bool isPasswordVisible = false;
   bool isCPasswordVisible = false;
   bool isPasswordGenerated = false; // To track if password is generated
 
-  void Register() {
-    if (selectedRole == 'Owner') {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginPage(),
-          ));
-    } else if(selectedRole == 'Tenant')
-     {
-      Navigator.push(
-        context,
-         MaterialPageRoute(
-          builder: (context) => LoginPage(),
-          ));   
-     }
- }
-
-  void registerUser() {
+  Future<void> registerUser() async {
     if (formKey.currentState!.validate()) {
-      // Registration logic here
       String username = usernameController.text;
       String email = emailController.text;
       String location = locationController.text;
+      String phone = phoneController.text;
       String password = passwordController.text;
-      String confirmPassword = confirmpasswordController.text;
       String role = selectedRole!;
 
-      // Implement your registration logic with the obtained data
+      if (
+        username.isNotEmpty &&
+        email.isNotEmpty &&
+        location.isNotEmpty &&
+        phone.isNotEmpty &&
+        password.isNotEmpty &&
+        role.isNotEmpty
+      ) {
+        await RegistrationServices.registerUser(username, email, location, phone, password, role, context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("All Field Are required")),
+        );
+      }
     }
   }
 
   String generatePassword(int length) {
-    const String chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+{}[]';
+    const String chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()_+{}[]';
     Random random = Random();
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)]).join();
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 
   @override
@@ -118,7 +117,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 15),
+                 SizedBox(height: 10),
+                TextFormField(
+                  controller: phoneController,
+                  decoration: const InputDecoration(
+                    labelText: 'Phone',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your phone';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 10),
                 TextFormField(
                   initialValue: passwordLength.toString(),
                   decoration: const InputDecoration(
@@ -137,7 +149,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      passwordController.text = generatePassword(passwordLength);
+                      passwordController.text =
+                          generatePassword(passwordLength);
                       confirmpasswordController.text = passwordController.text;
                       isPasswordGenerated = true;
                     });
@@ -147,12 +160,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 10),
                 TextFormField(
                   controller: passwordController,
-                  readOnly: isPasswordGenerated, // Make it read-only if password is generated
+                  readOnly:
+                      isPasswordGenerated, // Make it read-only if password is generated
                   decoration: InputDecoration(
                     labelText: 'Password',
                     suffixIcon: IconButton(
                         icon: Icon(
-                          isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -173,12 +189,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 SizedBox(height: 10),
                 TextFormField(
                   controller: confirmpasswordController,
-                  readOnly: isPasswordGenerated, // Make it read-only if password is generated
+                  readOnly:
+                      isPasswordGenerated, // Make it read-only if password is generated
                   decoration: InputDecoration(
                     labelText: 'Confirm Password',
                     suffixIcon: IconButton(
                         icon: Icon(
-                          isCPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          isCPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -226,24 +245,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                   ),
                 ),
-               const SizedBox(height: 15),
-              TextButton(style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
-                  Colors.deepPurple),
-                  padding: MaterialStatePropertyAll(
-                    EdgeInsets.all(16)),
-                  mouseCursor: MaterialStateMouseCursor.clickable,
-  
-              ),
-                onPressed: Register,
-                 child: const Text(
-                  style:TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  ) ,
-                           "Register")
-                           ),
+                const SizedBox(height: 15),
+                TextButton(
+                    style: const ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(Colors.deepPurple),
+                      padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
+                      mouseCursor: MaterialStateMouseCursor.clickable,
+                    ),
+                    onPressed: registerUser,
+                    child: const Text(
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                        "Register")),
               ],
             ),
           ),
